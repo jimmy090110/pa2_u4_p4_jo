@@ -38,7 +38,7 @@ public class PropietarioServiceImpl implements PropietarioService{
 	}
 
 	@Override
-	@Transactional(value = TxType.MANDATORY)
+	@Transactional(value =TxType.REQUIRES_NEW)
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
 		this.propietarioRepository.eliminar(id);

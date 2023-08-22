@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,9 +39,34 @@ public class PropietarioController {
 		
 	}
 	
+	
 	@PutMapping("/actualizar/{idPropietario}")
 	public String actualizarPropietario(@PathVariable ("idPropietario")Integer id, Propietario propietario) {
 		this.propietarioService.actualizar(propietario);
 		return "redirect:/propietarios/buscar";
+	}
+	
+	//http://localhost:8080/consecionario/propietarios/borrar/1
+	@DeleteMapping("/borrar/{idPropietario}")
+	public String eliminarporID(@PathVariable("idPropietario") Integer id) {
+		this.propietarioService.eliminar(id);
+		return "redirect:/propietarios/buscar";
+	
+	
+	
+	}
+	@PostMapping("/guardar")
+	public String insertarPropietario(Propietario propietario) {
+		this.propietarioService.insertar(propietario);
+		return "redirect:/propietarios/buscar";
+		
+		
+		
+	}
+	//metodo de página de redireaccionamientp
+	@GetMapping("/nuevo")
+	public String paginaNuevoPropietario(Propietario propietario){
+		return"vistaNuevoPropietario";
+		
 	}
 }
